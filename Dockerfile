@@ -1,17 +1,18 @@
-FROM ruby:3.2.0-alpine
+FROM ruby:3.2-slim
 LABEL maintainer="efrj@hotmail.com"
 
 # Minimal requirements to run a Rails app
-RUN apk add --no-cache --update build-base \
-                                linux-headers \
-                                git \
-                                postgresql-dev \
-                                nodejs \
-                                yarn \
-                                tzdata \
-                                neofetch \
-                                imagemagick \
-                                vips-dev
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    libpq-dev \
+    nodejs \
+    npm \
+    tzdata \
+    imagemagick \
+    libvips-dev \
+    && npm install --global yarn \
+    && rm -rf /var/lib/apt/lists/*
 
 ENV APP_PATH /usr/src/app
 
