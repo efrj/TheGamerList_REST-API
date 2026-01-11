@@ -1,0 +1,584 @@
+---
+openapi: 3.0.1
+info:
+  title: The Gamer List API
+  version: v1
+  description: API para gerenciamento de jogos, plataformas, gêneros e desenvolvedoras
+paths:
+  "/api/v1/games":
+    get:
+      summary: Lista todos os jogos
+      tags:
+      - Games
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    description:
+                      type: string
+                    release_year:
+                      type: integer
+                    video_url:
+                      type: string
+                      nullable: true
+                    genre_id:
+                      type: integer
+                    platform_id:
+                      type: integer
+                    softhouse_id:
+                      type: integer
+                    created_at:
+                      type: string
+                      format: datetime
+                    updated_at:
+                      type: string
+                      format: datetime
+    post:
+      summary: Cria um novo jogo
+      tags:
+      - Games
+      parameters: []
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                release_year:
+                  type: integer
+                video_url:
+                  type: string
+                genre_id:
+                  type: integer
+                platform_id:
+                  type: integer
+                softhouse_id:
+                  type: integer
+              required:
+              - title
+              - genre_id
+              - platform_id
+              - softhouse_id
+  "/api/v1/games/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: ID do jogo
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Mostra um jogo específico
+      tags:
+      - Games
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  description:
+                    type: string
+                  release_year:
+                    type: integer
+                  video_url:
+                    type: string
+                    nullable: true
+                  genre_id:
+                    type: integer
+                  platform_id:
+                    type: integer
+                  softhouse_id:
+                    type: integer
+                  created_at:
+                    type: string
+                    format: datetime
+                  updated_at:
+                    type: string
+                    format: datetime
+    put:
+      summary: Atualiza um jogo
+      tags:
+      - Games
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                release_year:
+                  type: integer
+                video_url:
+                  type: string
+    delete:
+      summary: Remove um jogo
+      tags:
+      - Games
+      responses:
+        '204':
+          description: no content
+  "/api/v1/generations":
+    get:
+      summary: Lista todas as gerações
+      tags:
+      - Generations
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    starting_year:
+                      type: integer
+                    created_at:
+                      type: string
+                      format: datetime
+                    updated_at:
+                      type: string
+                      format: datetime
+    post:
+      summary: Cria uma nova geração
+      tags:
+      - Generations
+      parameters: []
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                starting_year:
+                  type: integer
+              required:
+              - name
+  "/api/v1/generations/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: ID da geração
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Mostra uma geração específica
+      tags:
+      - Generations
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  starting_year:
+                    type: integer
+                  created_at:
+                    type: string
+                    format: datetime
+                  updated_at:
+                    type: string
+                    format: datetime
+    put:
+      summary: Atualiza uma geração
+      tags:
+      - Generations
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                starting_year:
+                  type: integer
+    delete:
+      summary: Remove uma geração
+      tags:
+      - Generations
+      responses:
+        '204':
+          description: no content
+  "/api/v1/genres":
+    get:
+      summary: Lista todos os gêneros
+      tags:
+      - Genres
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    created_at:
+                      type: string
+                      format: datetime
+                    updated_at:
+                      type: string
+                      format: datetime
+    post:
+      summary: Cria um novo gênero
+      tags:
+      - Genres
+      parameters: []
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              required:
+              - name
+  "/api/v1/genres/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: ID do gênero
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Mostra um gênero específico
+      tags:
+      - Genres
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  created_at:
+                    type: string
+                    format: datetime
+                  updated_at:
+                    type: string
+                    format: datetime
+    put:
+      summary: Atualiza um gênero
+      tags:
+      - Genres
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+    delete:
+      summary: Remove um gênero
+      tags:
+      - Genres
+      responses:
+        '204':
+          description: no content
+  "/api/v1/platforms":
+    get:
+      summary: Lista todas as plataformas
+      tags:
+      - Platforms
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    release_year:
+                      type: integer
+                    generation_id:
+                      type: integer
+                    created_at:
+                      type: string
+                      format: datetime
+                    updated_at:
+                      type: string
+                      format: datetime
+    post:
+      summary: Cria uma nova plataforma
+      tags:
+      - Platforms
+      parameters: []
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                release_year:
+                  type: integer
+                generation_id:
+                  type: integer
+              required:
+              - name
+              - generation_id
+  "/api/v1/platforms/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: ID da plataforma
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Mostra uma plataforma específica
+      tags:
+      - Platforms
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  release_year:
+                    type: integer
+                  generation_id:
+                    type: integer
+                  created_at:
+                    type: string
+                    format: datetime
+                  updated_at:
+                    type: string
+                    format: datetime
+    put:
+      summary: Atualiza uma plataforma
+      tags:
+      - Platforms
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                release_year:
+                  type: integer
+    delete:
+      summary: Remove uma plataforma
+      tags:
+      - Platforms
+      responses:
+        '204':
+          description: no content
+  "/api/v1/softhouses":
+    get:
+      summary: Lista todas as desenvolvedoras
+      tags:
+      - Softhouses
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    created_at:
+                      type: string
+                      format: datetime
+                    updated_at:
+                      type: string
+                      format: datetime
+    post:
+      summary: Cria uma nova desenvolvedora
+      tags:
+      - Softhouses
+      parameters: []
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+              required:
+              - name
+  "/api/v1/softhouses/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: ID da desenvolvedora
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Mostra uma desenvolvedora específica
+      tags:
+      - Softhouses
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  created_at:
+                    type: string
+                    format: datetime
+                  updated_at:
+                    type: string
+                    format: datetime
+    put:
+      summary: Atualiza uma desenvolvedora
+      tags:
+      - Softhouses
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+    delete:
+      summary: Remove uma desenvolvedora
+      tags:
+      - Softhouses
+      responses:
+        '204':
+          description: no content
+servers:
+- url: http://localhost:8000
+  description: Development server
