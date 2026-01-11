@@ -1,4 +1,5 @@
 class Api::V1::SofthousesController < ApplicationController
+  skip_before_action :authenticate_request!, only: [:index, :show]
   before_action :set_api_v1_softhouse, only: %i[ show update destroy ]
 
   # GET /api/v1/softhouses

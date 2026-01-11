@@ -1,4 +1,5 @@
 class Api::V1::GenerationsController < ApplicationController
+  skip_before_action :authenticate_request!, only: [:index, :show]
   before_action :set_api_v1_generation, only: %i[ show update destroy ]
 
   # GET /api/v1/generations
