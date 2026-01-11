@@ -10,6 +10,18 @@ Genre.destroy_all
 Softhouse.destroy_all
 Banner.destroy_all
 Content.destroy_all
+User.destroy_all
+
+puts "Criando usuário de teste..."
+
+User.create!(
+  name: "Admin User",
+  email: "admin@gamerlist.com",
+  password: "password123",
+  password_confirmation: "password123"
+)
+
+puts "  Usuário criado: admin@gamerlist.com / password123"
 
 puts "Criando Gerações de Consoles..."
 
@@ -273,6 +285,7 @@ banners_data.each do |banner_data|
 end
 
 puts "\nResumo do Seed:"
+puts "  #{User.count} usuários"
 puts "  #{Generation.count} gerações"
 puts "  #{Platform.count} plataformas"
 puts "  #{Genre.count} gêneros"

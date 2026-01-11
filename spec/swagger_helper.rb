@@ -28,7 +28,17 @@ RSpec.configure do |config|
           url: 'http://localhost:8000',
           description: 'Development server'
         }
-      ]
+      ],
+      components: {
+        securitySchemes: {
+          Bearer: {
+            type: :http,
+            scheme: :bearer,
+            bearerFormat: 'JWT',
+            description: 'JWT token for authentication. Format: Bearer {token}'
+          }
+        }
+      }
     }
   }
 

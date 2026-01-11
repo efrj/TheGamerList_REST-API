@@ -6,6 +6,15 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs'
   namespace :api do
     namespace :v1 do
+      # Authentication routes
+      post 'auth/login', to: 'authentication#login'
+      post 'auth/register', to: 'authentication#register'
+      
+      # User routes
+      get 'users/me', to: 'users#me'
+      put 'users/me', to: 'users#update'
+      
+      # Resource routes
       resources :softhouses
       resources :platforms_informations
       resources :platforms

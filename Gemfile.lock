@@ -76,6 +76,8 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
+    base64 (0.3.0)
+    bcrypt (3.1.21)
     bigdecimal (4.0.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
@@ -122,6 +124,8 @@ GEM
       addressable (~> 2.8)
       bigdecimal (>= 3.1, < 5)
     jsonapi-renderer (0.2.2)
+    jwt (3.1.2)
+      base64
     loofah (2.20.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -238,6 +242,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.10.2)
   annotate
+  bcrypt (~> 3.1.7)
   bootsnap
   database_cleaner
   debug
@@ -245,6 +250,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   image_processing (~> 1.12)
+  jwt
   mini_magick (~> 4.11)
   pg (~> 1.1)
   puma (~> 5.0)
