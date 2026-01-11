@@ -1,51 +1,50 @@
 class Api::V1::GamesController < ApplicationController
-  before_action :set_api_v1_game, only: %i[ show update destroy ]
+  before_action :set_game, only: %i[ show update destroy ]
 
   # GET /api/v1/games
   def index
-    @api_v1_games = Api::V1::Game.all
-
-    render json: @api_v1_games
+    @games = Game.all
+    render json: @games
   end
 
   # GET /api/v1/games/1
   def show
-    render json: @api_v1_game
+    render json: @game
   end
 
   # POST /api/v1/games
   def create
-    @api_v1_game = Api::V1::Game.new(api_v1_game_params)
+    @game = Game.new(game_params)
 
-    if @api_v1_game.save
-      render json: @api_v1_game, status: :created, location: @api_v1_game
+    if @game.save
+      render json: @game, status: :created
     else
-      render json: @api_v1_game.errors, status: :unprocessable_entity
+      render json: @game.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /api/v1/games/1
   def update
-    if @api_v1_game.update(api_v1_game_params)
-      render json: @api_v1_game
+    if @game.update(game_params)
+      render json: @game
     else
-      render json: @api_v1_game.errors, status: :unprocessable_entity
+      render json: @game.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /api/v1/games/1
   def destroy
-    @api_v1_game.destroy
+    @game.destroy
+    head :no_content
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_api_v1_game
-      @api_v1_game = Api::V1::Game.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def api_v1_game_params
-      params.fetch(:api_v1_game, {})
-    end
+  def set_game
+    @game = Game.find(params[:id])
+  end
+
+  def game_params
+    params.require(:game).permit(:title, :description, :release_year, :video_url, :genre_id, :platform_id, :softhouse_id)
+  end
 end
